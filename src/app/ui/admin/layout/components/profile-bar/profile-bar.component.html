@@ -1,0 +1,24 @@
+<div class="container-profile-bar">
+
+  <div class="container-logo">
+    <div class="flex justify-content-center align-center text-center" [routerLink]="['/register']">
+      <img class="img-logo" alt="Logo Keydoc" src="../../../../../assets/img/logo-app.png" width="50">
+    </div>
+  </div>
+
+  <div class="container-action-user">
+
+    <!-- <div class="notifications">
+      <i class="fa-solid fa-bell"></i>  
+    </div> -->
+
+    <div class="user-profile flex">
+      <p-avatar shape="circle" class="profile-menu-avatar"  label="{{getInitialName(dataLocal.name)}}" (click)="menu.toggle($event)"></p-avatar>
+      <p-menu #menu appendTo="body" [popup]="true" styleClass="menucus" [model]="items"></p-menu>
+      
+      <span style="display: flex;  align-items: center;">
+        <label class="user-profile-text">{{dataLocal?.name == undefined ? ' ' : dataLocal.name}}</label>
+      </span>
+    </div>
+  </div>
+</div>

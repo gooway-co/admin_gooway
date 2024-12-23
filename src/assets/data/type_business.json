@@ -1,0 +1,22 @@
+{
+    "typeBusiness": [
+        {
+            "name": "Gimnasio"
+        },
+        {
+            "name": "Yoga O Pilates"
+        },
+        {
+            "name": "Crossfit"
+        },
+        {
+            "name": "Academia Deportiva"
+        },
+        {
+            "name": "Spa"
+        },
+        {
+            "name": "Otro"
+        }
+    ]
+}

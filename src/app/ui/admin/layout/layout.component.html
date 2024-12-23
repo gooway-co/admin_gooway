@@ -1,0 +1,18 @@
+<div class="container-layout">
+    <div class="profile-bar">
+        <app-profile-bar></app-profile-bar>
+    </div>
+
+    <div class="container-content">
+
+        <div class="side-bar" [ngClass]="{'active': booleanClick}">
+            <app-side-bar 
+                (onBooleanOut)="booleanClick = $event">
+            </app-side-bar>
+        </div>
+
+        <div class="container-router" [ngClass]="{'active': !booleanClick}">
+            <router-outlet></router-outlet>
+        </div>
+    </div> 
+</div>

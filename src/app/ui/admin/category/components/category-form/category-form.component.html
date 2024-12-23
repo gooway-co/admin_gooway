@@ -1,0 +1,30 @@
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Nombre de la categoría</label>
+    <input id="name" formControlName="name" type="text" />
+  </div>
+
+  <div>
+    <label for="image">Imagen de la categoría</label>
+    <input id="image" formControlName="image" type="text" />
+  </div>
+
+  <div>
+    <label for="description">Descripción</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <label for="code">Código</label>
+    <input id="code" formControlName="code" type="text" />
+  </div>
+
+  <button type="submit" [disabled]="categoryForm.invalid">
+    {{ isEditMode ? 'Actualizar' : 'Crear' }} Categoría
+  </button>
+
+  <!-- Botón para eliminar solo si estamos en modo de edición -->
+  <!-- <button *ngIf="isEditMode" type="button" (click)="onDelete()" class="delete-btn">
+    Eliminar Categoría
+  </button> -->
+</form>

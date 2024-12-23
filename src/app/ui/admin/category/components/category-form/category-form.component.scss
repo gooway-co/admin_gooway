@@ -1,0 +1,89 @@
+/* src/app/category/category-form/category-form.component.css */
+
+/* General form container */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  button.delete-btn {
+    width: 100%;
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  button.delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  div {
+    margin-bottom: 15px;
+  }
+  
+  /* Labels */
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+  }
+  
+  /* Input fields */
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:disabled {
+    background-color: #b0d4ff;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error handling */
+  input.ng-invalid.ng-touched,
+  textarea.ng-invalid.ng-touched {
+    border-color: #ff4d4d;
+  }
+  
+  input.ng-valid.ng-touched,
+  textarea.ng-valid.ng-touched {
+    border-color: #4caf50;
+  }
+  
+  

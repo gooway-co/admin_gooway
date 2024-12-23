@@ -1,0 +1,24 @@
+.customer-badge.status-SUSPENDED {
+    background-color: #717374;
+    color: #ffffff;
+}
+
+.customer-badge.status-ACTIVE {
+    background-color: #01e63d;
+    color: #ffffff;
+}
+
+.customer-badge.status-INACTIVE {
+    background-color: #f03705;
+    color: #ffffff;
+}
+
+.customer-badge {
+    border-radius: 2px;
+    padding: 0.25em 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+

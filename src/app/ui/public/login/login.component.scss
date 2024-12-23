@@ -1,0 +1,31 @@
+.login-text-footer {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-greys-70);
+    font-weight: 500;
+    font-size: 16px;
+    &:hover {
+        text-decoration: revert;
+        color: var(--color-secondary-maroon);
+    }
+}
+
+.card-pass-fail {
+    background: #f44336;
+    border-radius: 8px;
+    display: flex;
+    align-self: center;
+    padding: 19px;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.container-logo {
+    border-radius: 60px;
+    height: 64px;
+    width: 64px;
+    padding: 16px;
+    background-color: #0dcaf0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

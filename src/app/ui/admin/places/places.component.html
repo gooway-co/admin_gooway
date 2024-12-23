@@ -1,0 +1,210 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<p-blockUI [blocked]="loading" appendTo="body"></p-blockUI>
+
+<div class="flex justify-content-between pb-3">
+    <h1>Lugares</h1>
+    <button pButton pRipple label="Nuevo lugar" (click)="hideWindow()" *ngIf="places.length > 0"></button>
+</div>
+
+<div *ngIf="places.length == 0">
+    <app-card-action-create image="../../../assets/img/location.svg" title="Gestiona tus lugares"
+        description="Aquí Puedes administrar todos los lugares"
+        textButton="Agregar un nuevo Lugar" (showWindowsBool)="displayModal = $event"></app-card-action-create>
+</div>
+
+<app-table-general [dataSource]="places" [rowTable]="rowTable" (dataTable)="edit($event)"
+    (dataTable)="delete($event)" (showWindowsDelete)="displayDialogDeleted = $event"
+    (showWindowsBool)="displayModal = $event"></app-table-general>
+
+<p-dialog [(visible)]="displayModal" id="formPlacesView" appendTo="loading-overlay"  (onHide)="clearInputForm()" [modal]="true" [style]="{width: '50%'}" [closable]="false">
+    <div class="header-dialog">
+        <div>
+            <label class="text-dialog">Crear un nuevo lugar</label>
+        </div>
+        <div class="container-header-icon" (click)="hideWindow()">
+            <span class="span-header-icon">
+                <i class="pi pi-times"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="mb-4 flex flex-column">
+        <form [formGroup]="placeForm">
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="code">Categoría</label>
+                    <p-dropdown class="containe-select" [options]="categories" optionValue="_id" [filter]="true" filterBy="name"
+                            formControlName="categoryId" optionLabel="name" placeholder="Seleccionar la categorria" [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.categoryId.invalid &&
+                            (placeForm.controls.categoryId.dirty || placeForm.controls.categoryId.touched), 
+                            'is-valid': placeForm.controls.categoryId.valid}">
+                    </p-dropdown>
+                    <!-- <span class="p-input-icon-right w-full mb-3">
+                        <i class="pi pi-qrcode" (click)="generateCode()"></i>
+                        <input id="code" type="text" [readonly]="true" pInputText class="p-invalid w-full"
+                            formControlName="code" [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.code.invalid &&
+                            (placeForm.controls.code.dirty || placeForm.controls.code.touched), 
+                            'is-valid': placeForm.controls.code.valid}">
+                    </span> -->
+                </div>
+
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="name">Nombre del lugar</label>
+                    <input pInputText id="name" formControlName="name" type="text" [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.name.invalid &&
+                    (placeForm.controls.name.dirty || placeForm.controls.name.touched), 
+                    'is-valid': placeForm.controls.name.valid}" />
+                </div>
+            </div>
+
+            <div class="file-upload-container mt-2">
+                <label for="images" class="file-upload-label">Imágenes del lugar</label>
+              
+                <!-- Input personalizado para subir archivos -->
+                <div class="file-upload-box">
+                  <input id="images" type="file" multiple class="file-input" (change)="onFileSelected($event)" />
+                  <div class="file-upload-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="file-upload-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7V3m0 0a2 2 0 012-2h4a2 2 0 012 2v4m-6 0h6M13 3h6a2 2 0 012 2v4m0 10v4m0 0a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4m6 0h-6M7 21H3a2 2 0 01-2-2v-4m0 0h6" />
+                    </svg>
+                    <span class="file-upload-text">Selecciona o arrastra las imágenes aquí</span>
+                  </div>
+                </div>
+              
+                <div id="file-list" class="file-list">
+                  <div *ngFor="let image of selectedImages; let i = index" class="thumbnail-container">
+                    <img [src]="image.preview" alt="Miniatura" class="thumbnail-image">
+                    <button class="remove-button" (click)="removeImage(i)">x</button>
+                  </div>
+                </div>
+            </div>
+              
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="description">Descripción</label>
+                    <textarea id="description" pInputTextarea classp-invalid="description" formControlName="description"
+                    [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.description.invalid &&
+                    (placeForm.controls.description.dirty || placeForm.controls.description.touched), 
+                    'is-valid': placeForm.controls.description.valid}"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="address">dirección</label>
+                    <textarea id="address" pInputTextarea classp-invalid="address" formControlName="address"
+                    [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.address.invalid &&
+                    (placeForm.controls.address.dirty || placeForm.controls.address.touched), 
+                    'is-valid': placeForm.controls.address.valid}"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="flex flex-row">
+
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <p class="my-2" for="latitud">Latitud <small>Ejem:  3.435906</small></p>
+                    <input pInputText id="latitud" formControlName="latitud" type="number"  class="p-invalid w-full"
+                   [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.latitud.invalid &&
+                    (placeForm.controls.latitud.dirty || placeForm.controls.latitud.touched), 
+                    'is-valid': placeForm.controls.latitud.valid}"/>
+                </div>
+
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="longitud">Longitud <small >Ejem: -76.5646</small></label>
+                    <input pInputText id="longitud" formControlName="longitud" type="number" [ngClass]="{'ng-invalid ng-dirty': placeForm.controls.longitud.invalid &&
+                    (placeForm.controls.longitud.dirty || placeForm.controls.longitud.touched), 
+                    'is-valid': placeForm.controls.longitud.valid}" />
+                </div>
+
+            </div>
+
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="autor">Autor</label>
+                    <input pInputText id="autor" formControlName="autor" type="text" />
+                </div>
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="openingDate">Fecha de Apertura</label>
+                    <input pInputText id="openingDate" formControlName="openingDate" type="date" />
+                </div>
+            </div>
+
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="dedication">Dedicación</label>
+                    <input pInputText id="dedication" formControlName="dedication" type="text" />
+                </div>
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="reference">Referencia</label>
+                    <input pInputText id="reference" formControlName="reference" type="text" />
+                </div>
+            </div>
+
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="mainTypology">Tipología Principal</label>
+                    <input pInputText id="mainTypology" formControlName="mainTypology" type="text" />
+                </div>
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="secondaryTypology">Tipología Secundaria</label>
+                    <input pInputText id="secondaryTypology" formControlName="secondaryTypology" type="text" />
+                </div>
+            </div>
+
+            <div class="flex flex-row">
+                <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+                    <label class="my-2" for="advocacy">Abogacía</label>
+                    <input pInputText id="advocacy" formControlName="advocacy" type="text" />
+                </div>
+            </div>
+
+            <div class="audio-upload-container">
+                <label for="audio" class="audio-label">Subir archivo de audio</label>
+            
+                <div class="audio-input-wrapper">
+                    <input 
+                        type="file" 
+                        id="audio" 
+                        accept="audio/*" 
+                        class="audio-input-hidden" 
+                        formControlName="audio"
+                        (change)="handleAudioFileInput($event)"
+                    />
+            
+                    <button class="custom-upload-btn" onclick="document.getElementById('audio').click();">
+                        {{"Seleccionar archivo " + nameAudioFile}}
+                    </button>
+            
+                </div>
+            
+                <p class="help-text">Selecciona un archivo de audio en formato .mp3 o .wav</p>
+            </div>
+            
+
+        </form>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-between">
+            <div class="dialog-footer-text"></div>
+            <div>
+                <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="hideWindow()"></button>
+                <button pButton pRipple label="{{checkUpdateOrSave ? 'Actualizar' : 'Guardar' }}"
+                    (click)="validateForm(placeForm)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDialogDeleted" [modal]="true" [style]="{ width: '27vw' }">
+    <div class="text-center my-4">
+        <i class="pi pi-times-circle icon-error mb-2"></i>
+        <h3>Eliminar registro</h3>
+    </div>
+    <div class="flex flex-row flex-wrap justify-content-around">
+        <button pButton pRipple type="button" label="Cancelar" (click)="closedDialog()" class="p-button-secondary"></button>
+        <button pButton type="button" class="tox-button" (click)="deleteDocument()" label="Aceptar"></button>
+    </div>
+</p-dialog>
+
+<p-toast></p-toast>

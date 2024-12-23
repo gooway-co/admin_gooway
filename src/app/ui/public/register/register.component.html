@@ -1,0 +1,154 @@
+<div class="content-register flex align-items-center justify-content-center">
+    <div class="card-regiter  shadow-1">
+      <div class="flex-column">
+        <p-steps [model]="items" [(activeIndex)]="activeIndex" class="customstepper" [readonly]="false"></p-steps>
+      </div>
+      <div class="container-form" *ngIf="activeIndex == 0">
+        <h1 class="my-3">Ayúdanos a mejorar tu experiencia contándonos sobre tu negocio</h1>
+        <p class="text-size-16" >Esta información nos permitirá brindarte una solución que se ajuste a tus necesidades:</p>
+        <form [formGroup]="businessDataForm">
+  
+          <div class="flex flex-column" style="width: -webkit-fill-available;">
+            <label class="my-3" >Nombre del Negocio</label>
+            <input type="text" pInputText id="inputName" formControlName="businessName" [ngClass]="{'ng-invalid ng-dirty': businessDataForm.controls.businessName.invalid &&
+                      (businessDataForm.controls.businessName.dirty ||
+                      businessDataForm.controls.businessName.touched),
+                      'is-valid': businessDataForm.controls.businessName.valid}">
+          </div>
+  
+          <div class="flex flex-column" style="width: -webkit-fill-available;">
+  
+            <label class="my-3" >Tipo de negocio</label>
+            <p-dropdown class="containe-select" optionLabel="name" [options]="typesBusiness"
+              formControlName="typeBusiness" placeholder="Seleccionar Tipo de documento" [ngClass]="{'ng-invalid ng-dirty': businessDataForm.controls.typeBusiness.invalid &&
+                          (businessDataForm.controls.typeBusiness.dirty ||
+                          businessDataForm.controls.typeBusiness.touched),
+                          'is-valid': businessDataForm.controls.typeBusiness.valid}">
+            </p-dropdown>
+          </div>
+  
+          <div class="flex flex-column" style="width: -webkit-fill-available;">
+  
+            <label class="my-3" >¿Donde Se Encuenta Tu Negocio?</label>
+            <p-dropdown class="containe-select" optionLabel="name" [options]="userCity" [filter]="true" filterBy="name"
+              formControlName="cityBusiness" placeholder="Seleccionar la Ciudad" [ngClass]="{'ng-invalid ng-dirty': businessDataForm.controls.cityBusiness.invalid &&
+                          (businessDataForm.controls.cityBusiness.dirty ||
+                          businessDataForm.controls.cityBusiness.touched),
+                          'is-valid': businessDataForm.controls.cityBusiness.valid}">
+            </p-dropdown>
+          </div>
+  
+          <div class="flex flex-column" style="width: -webkit-fill-available;">
+            <label class="my-3" >Dirección del Negocio</label>
+  
+            <textarea [rows]="3" [cols]="30" pInputTextarea [autoResize]="true" formControlName="addressBusiness"
+              [ngClass]="{'ng-invalid ng-dirty': businessDataForm.controls.addressBusiness.invalid &&
+                      (businessDataForm.controls.addressBusiness.dirty ||
+                      businessDataForm.controls.addressBusiness.touched),
+                      'is-valid': businessDataForm.controls.addressBusiness.valid}"></textarea>
+          </div>
+  
+          <div style="text-align: end">
+            <button pButton pRipple type="button" label="Siguiente" (click)="nextPage(businessDataForm)"
+              class="my-3 p-button md:col-4"></button>
+  
+          </div>
+        </form>
+      </div>
+  
+      <div class="container-form" *ngIf="activeIndex == 1">
+        <h3>Ayúdanos a mejorar tu experiencia contándonos sobre tu negocio</h3>
+        <form [formGroup]="userDataForm">
+          <div class="flex flex-row">
+            <div class="flex flex-column mr-3" style="width: -webkit-fill-available;">
+              <label class="my-3" >Nombre</label>
+              <input type="text" pInputText id="inputName" formControlName="name" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.name.invalid &&
+                          (userDataForm.controls.name.dirty ||
+                          userDataForm.controls.name.touched),
+                          'is-valid': userDataForm.controls.name.valid}">
+            </div>
+  
+            <div class="flex flex-column" style="width: -webkit-fill-available;">
+              <label class="my-3" >Apellidos</label>
+              <input type="text" pInputText id="inputLastName" formControlName="lastName" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.lastName.invalid &&
+                          (userDataForm.controls.lastName.dirty ||
+                          userDataForm.controls.lastName.touched),
+                          'is-valid': userDataForm.controls.lastName.valid}">
+            </div>
+          </div>
+  
+          <div class="flex flex-row">
+            <div class="flex flex-column mr-3" style="width: -webkit-fill-available;">
+  
+              <label class="my-3" >Genero</label>
+              <p-dropdown class="containe-select" [options]="genders" optionLabel="name" placeholder="Seleccionar Genero"
+                formControlName="gender" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.gender.invalid &&
+                              (userDataForm.controls.gender.dirty ||
+                              userDataForm.controls.gender.touched),
+                              'is-valid': userDataForm.controls.gender.valid}">
+              </p-dropdown>
+            </div>
+  
+            <div class="flex flex-column" style="width: -webkit-fill-available;">
+              <label class="my-3" >Teléfono</label>
+              <input type="number" pInputText id="inputName" formControlName="phone" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.phone.invalid &&
+                          (userDataForm.controls.phone.dirty ||
+                          userDataForm.controls.phone.touched),
+                          'is-valid': userDataForm.controls.phone.valid}">
+            </div>
+          </div>
+  
+          <div class="flex flex-row">
+            <div class="flex flex-column mr-3" style="width: -webkit-fill-available;">
+  
+              <label class="my-3" >Ciudad</label>
+              <p-dropdown class="containe-select" [options]="userCity" [filter]="true" filterBy="name"
+                formControlName="city" optionLabel="name" placeholder="Seleccionar Ciudad"></p-dropdown>
+            </div>
+  
+            <div class="flex flex-column" style="width: -webkit-fill-available;">
+              <label class="my-3" >Fecha de Nacimineto</label>
+  
+              <p-calendar [showIcon]="true" inputId="icon" formControlName="birthday" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.birthday.invalid &&
+                          (userDataForm.controls.birthday.dirty ||
+                          userDataForm.controls.birthday.touched),
+                          'is-valid': userDataForm.controls.birthday.valid}"></p-calendar>
+            </div>
+          </div>
+  
+          <div class="flex flex-column" style="width: -webkit-fill-available;">
+            <label class="my-3" >Correo Eletrónico</label>
+            <input type="text" pInputText id="inputName" formControlName="email" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.email.invalid &&
+                      (userDataForm.controls.email.dirty ||
+                      userDataForm.controls.email.touched),
+                      'is-valid': userDataForm.controls.email.valid}">
+          </div>
+  
+          <div class="flex flex-column" tyle="width: -webkit-fill-available;">
+            <label class="my-3" >Contraseña</label>
+            <span class="p-input-icon-right flex flex-column">
+              <i [class]="show ? 'pi pi-eye-slash' : 'pi pi-eye'" (click)="showPassword()"></i>
+              <input [type]="show ? 'text' : 'password'" pInputText formControlName="password"
+                placeholder="Ingrese su contraseña" [ngClass]="{'ng-invalid ng-dirty': userDataForm.controls.password.invalid &&
+                          (userDataForm.controls.password.dirty ||
+                          userDataForm.controls.password.touched),
+                          'is-valid': userDataForm.controls.password.valid}">
+            </span>
+          </div>
+  
+          <div class="flex flex-wrap justify-content-between">
+            <button pButton pRipple type="button" label="Volver" (click)="returnPage()" class="my-3 p-button md:col-4">
+            </button>
+  
+            <button pButton pRipple type="button" label="Continuar" (click)="validateForm(userDataForm)"
+              class="my-3 p-button md:col-4">
+            </button>
+          </div>
+        </form>
+      </div>
+  
+    </div>
+  </div>
+  
+  <p-toast></p-toast>
+  

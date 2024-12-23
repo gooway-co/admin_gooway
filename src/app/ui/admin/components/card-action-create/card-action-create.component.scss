@@ -1,0 +1,29 @@
+.container-card-create {
+    
+    .card-create {
+        margin: auto;
+        text-align: center;
+        .card-create-text {
+            font-weight: 600;
+            line-height: 1.15rem;
+            text-transform: initial;
+            letter-spacing: normal;
+            font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+            font-size: 1.25rem;
+        }
+        .container-card-create-description {
+            width: 400px;
+            margin-bottom: 1.6rem;
+            .card-create-description {
+                font-weight: 400;
+                color: #6d7175;
+                font-family: -apple-system,BlinkMacSystemFont,"San Francisco","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+                font-size: 0.9rem;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+            }
+        }
+        
+    }
+
+}

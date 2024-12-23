@@ -1,0 +1,119 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<p-blockUI [blocked]="loading" appendTo="body"></p-blockUI>
+
+<div class="flex justify-content-between pb-3">
+  <h1>Categoría lugares</h1>
+  <button pButton pRipple label="Nueva categoría" (click)="hideWindow()" *ngIf="categoriesPlace.length > 0"></button>
+</div>
+
+<div *ngIf="categoriesPlace.length == 0">
+  <app-card-action-create image="../../../assets/img/category-icon.svg" title="Gestiona tus categorías"
+    description="Aquí Puedes administrar todos los categoría crear, actualizar, eliminar entre muchas opciones más."
+    textButton="Agregar una nueva categoría" (showWindowsBool)="displayModal = $event"></app-card-action-create>
+</div>
+
+<app-table-general
+    [dataSource]="categoriesPlace"
+    [rowTable]="rowTable"
+    (dataTable)="edit($event)"
+    (dataTable)="delete($event)"
+    (showWindowsDelete)="displayDialogDeleted = $event"
+    (showWindowsBool)="displayModal = $event"
+></app-table-general>
+
+<p-dialog  [(visible)]="displayModal" [modal]="true" [style]="{width: '50%  '}" [closable]="false">
+
+    <div class="header-dialog">
+        <div>
+         <label class="text-dialog">Crear una nueva categoría</label> 
+        </div>
+        <div class="container-header-icon" (click)="hideWindow()">
+            <span class="span-header-icon">
+                <i class="pi pi-times"></i>
+            </span>
+    
+        </div>
+    </div>
+    <div  class="mb-4 flex flex-column">
+      
+      <form [formGroup]="categoryForm">
+        <div class="flex flex-row">
+          <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+
+            <label class="my-2" for="code" >Código</label>
+
+            <span class="p-input-icon-right w-full mb-3">
+              <i class="pi pi-qrcode" (click)="generateCode()"></i>
+              <input id="code" type="text"    [readonly]="true" pInputText class="p-invalid w-full" formControlName="code"
+              [ngClass]="{'ng-invalid ng-dirty': categoryForm.controls.code.invalid &&
+                  (categoryForm.controls.code.dirty ||
+                  categoryForm.controls.code.touched),
+                  'is-valid': categoryForm.controls.code.valid}">
+            </span>
+
+
+          </div>
+
+          <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+            <label class="my-2" for="name">Nombre de la categoría</label>
+            <input pInputText  id="name" formControlName="name" type="text"  
+            [ngClass]="{'ng-invalid ng-dirty': categoryForm.controls.name.invalid &&
+                (categoryForm.controls.name.dirty ||
+                categoryForm.controls.name.touched),
+                'is-valid': categoryForm.controls.name.valid}"/>
+          </div>
+        </div>
+      
+        <div class="flex flex-row">
+          <div class="flex flex-column mr-1" style="width: -webkit-fill-available;">
+            <label class="my-2" for="description">Descripción</label>
+            <textarea id="description" classp-invalid="description" formControlName="description"></textarea>
+          </div>
+        </div>
+      
+      </form>
+      
+
+    </div>
+
+    <ng-template pTemplate="footer" >
+        <div class="flex justify-content-between">
+            <div class="dialog-footer-text">
+                
+            </div>
+          
+            <div>
+                <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="hideWindow()"></button>
+                <button pButton pRipple label="{{checkUpdateOrSave ? 'Actualizar' : 'Guardar' }}" (click)="validateForm(categoryForm)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDialogDeleted" [modal]="true" [style]="{ width: '27vw' }">
+  <div class="text-center my-4">
+    <i class="pi pi-times-circle icon-error mb-2"></i>
+    <h3>
+      Eliminar registro
+    </h3>
+  </div>
+  <div class="flex flex-row flex-wrap justify-content-around">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancelar"
+      (click)="closedDialog()"
+      class="p-button-secondary"
+    ></button>
+    <button
+      pButton
+      type="button"
+      class="tox-button"
+      (click)="deleteDocument()"
+      label="Aceptar"
+    ></button>
+  </div>
+</p-dialog>
+
+<p-toast></p-toast>

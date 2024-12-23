@@ -1,0 +1,140 @@
+<p-dialog  [(visible)]="displayModal" [modal]="true" [style]="{width: '50%  '}">
+
+    <div class="header-dialog">
+        <div>
+         <label class="text-dialog">Crear una nueva campaña</label> 
+        </div>
+        <div class="container-header-icon" (click)="hideWindow()">
+            <span class="span-header-icon">
+                <i class="pi pi-times"></i>
+            </span>
+       
+          
+        </div>
+    </div>
+    <div  class="card-style mb-4 flex flex-column">
+        <h3>Programar campaña</h3>
+        <div class="container-programe-ads mb-3">
+            <div class="flex flex-column">
+                <label class="text-size-16 mb-2">Fecha de inicio</label>
+                <p-calendar [(ngModel)]="date3" class="w-15rem" [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
+
+            <div class="flex flex-column">
+                <label  class="text-size-16 mb-2">Time / 12h</label>
+                <p-calendar [(ngModel)]="date8" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+            </div>
+            <div class="flex flex-column">
+                <label  class="text-size-16 mb-2">Time / 12h</label>
+                <p-calendar [(ngModel)]="date8" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+            </div>
+        </div>
+
+        <div class="container-programe-ads mb-3">
+            <div class="flex flex-column">
+                <label class="text-size-16 mb-2">Días</label>
+                <p-inputNumber  mode="decimal"  [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100">
+                </p-inputNumber>
+            </div>
+
+            <div class="flex flex-column">
+                <label  class="text-size-16 mb-2">Fecha de finalización</label>
+                <p-calendar [(ngModel)]="date3" [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
+            <div class="flex flex-column">
+                <label  class="text-size-16 mb-2">Fecha de finalización</label>
+                <p-calendar [(ngModel)]="date3" [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
+        </div>
+        <p-divider></p-divider>
+        <div class=" my-5">
+
+            <h3>Presupuesto diario</h3>
+            <div class="mb-3 flex flex-row justify-content-center">
+                <p style="font-size: 25px;; color: var(--color-primary); display: flex;
+                align-items: center; font-weight: 500; padding:0px 16px;">$</p>
+                <p style="font-size: 48px; color: var(--color-primary); font-weight: 500;">15.000</p>
+            </div>
+
+            <div class="flex flex-row align-items-center justify-content-between">
+                <div>
+                    <p class="text-description m-0">$5000</p>
+                </div>
+                <div class="w-full px-4">
+                    <p-slider  [min]="0" [max]="100"></p-slider>
+                </div>
+                <div>
+                    <p class="text-description m-0">$200.000</p>
+                </div>
+            </div>
+        </div>
+       
+     
+    </div>
+
+    <div class="container-create-ads">
+        
+        <div>
+            
+            <div class="mb-4">
+                <div class="card-style flex flex-column">
+                    <h3>Categoría de anuncio especial</h3>
+                    <p class="text-description">Anuncios sobre créditos, empleos, viviendas o temas sociales, elecciones o política</p>
+                </div>
+    
+            </div>
+         
+            <!-- <div>
+                <div class="card-style flex flex-column">
+                    <h3>Publico</h3>
+                    <p class="text-description">¿Quién quieres que vea tu anuncio?</p>
+                    <p-gmap [options]="options" [style]="{'width':'100%','height':'320px'}" ></p-gmap>
+                </div>
+            </div> -->
+           
+        </div>
+        <div>
+            <div class="card-style flex flex-column mb-4">
+                <p>Categoría de anuncio especial</p>
+                <p class="text-description">Anuncios sobre créditos, empleos, viviendas o temas sociales, elecciones o política</p>
+            </div>
+
+            <div class="card-style flex flex-column mb-4">
+                <p class="mb-2">Resultados diarios estimados</p>
+                <div class="background-style flex flex-column">
+                    <p class="text-description">Cuentas del centro de cuentas alcanzadas</p>
+                    <p class="text-size-16">1,5 mil - 4,5 mil</p>
+                </div>
+            </div>
+
+            <div class="card-style flex flex-column">
+                <h3 class="mb-2">Resumen del pago</h3>
+                <p class="text-description">Tu anuncio estará en circulación durante 7 días.</p>
+                <div class="background-style flex flex-column">
+                    <p >Presupuesto total</p>
+                    <p class="text-description">$5000 por día durante 7 días.</p>
+                    <p-divider></p-divider>
+                    <div class="flex flex-row justify-content-between">
+                        <p class="text-size-16">Total</p>
+                        <p class="text-description m-0">$17.000</p>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <ng-template pTemplate="footer" >
+        <div class="flex justify-content-between">
+            <div class="dialog-footer-text">
+                <p>Más información</p>
+            </div>
+          
+            <div>
+                <button pButton type="button" label="Cancelar" class="p-button-outlined" (click)="hideWindow()"></button>
+                <button pButton pRipple label="Confirmar"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

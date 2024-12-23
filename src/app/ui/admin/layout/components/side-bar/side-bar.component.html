@@ -1,0 +1,17 @@
+<div class="side-bar">
+
+  <div class="list-container">
+    <ul class="list-group">
+      <li *ngFor="let item of menu index as index " class="list-group-item" [ngClass]="{'activeLi': !booleanClick }"
+        [routerLink]="[item.route]" 
+        routerLinkActive="active"
+        pTooltip="menu de opciones" 
+        [tooltipDisabled]="booleanClick" 
+        tooltipStyleClass="custom-tooltip">
+        <i class="list-icon {{item.icon}}"></i>
+        <span class="list-text">{{item.text}}</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
