@@ -63,7 +63,7 @@ export class PlacesComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
-    private categoryService: CategoryPlacesService,
+    private categoryService: CategoryService,
     private cd: ChangeDetectorRef,
     private viewContainerRef: ViewContainerRef
   ) {}

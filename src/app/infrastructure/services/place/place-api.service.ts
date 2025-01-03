@@ -32,7 +32,6 @@ export class PlaceService {
 
   addPlace(Place: any): Observable<any> {
       //Place.companyId = this.local.companyId;
-      Place.append('companyId', this.local.companyId);
       const URI = this.urlApi + 'places/create';
       return this.http.post<Place>(URI, Place).
       pipe(
@@ -92,13 +91,8 @@ export class PlaceService {
 
   getPlacesByCompany(): Observable<any> {
     const URI = this.urlApi + `places/listar`;
-    let companyId = this.local.companyId
-
-    let data = {
-      "companyId" : companyId
-    };
     
-    return this.http.post<Place>(URI, data).
+    return this.http.get<Place>(URI).
     pipe(
       catchError(async (err) => {
         if (err.status == 401) {
