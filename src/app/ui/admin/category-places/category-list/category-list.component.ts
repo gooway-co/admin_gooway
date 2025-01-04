@@ -89,7 +89,6 @@ export class CategoryPlaceComponent implements OnInit {
   initForm() {
     this.categoryForm = this.formBuilder.group({
       name: ['', Validators.required],
-      image: [''],
       description: [''],
       code: ['', Validators.required],
     });
@@ -166,6 +165,7 @@ export class CategoryPlaceComponent implements OnInit {
 
   saveCategory(categoryForm: FormGroup) {
     let categoryData = categoryForm.value;
+    console.log("categoryData ", categoryData);
     this.loading = true;
     this.categoryService.addCategory(categoryData).subscribe((response) => {
       this.loading = false;
@@ -214,7 +214,6 @@ export class CategoryPlaceComponent implements OnInit {
   clearInputForm() {
     this.categoryForm.controls.name.setValue('');
     this.categoryForm.controls.description.setValue('');
-    this.categoryForm.controls.image.setValue('');
     this.categoryId = '';
   }
 

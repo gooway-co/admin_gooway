@@ -35,9 +35,9 @@ export class CategoryPlacesService {
 
   addCategory(category: any): Observable<any> {
     // Agrega el companyId al objeto category
-    category['companyId'] = this.local.companyId;
   
-    const URI = `${this.urlApi}categoriesPlaces/create`;
+    const URI = this.urlApi + `categoriesPlaces/create`;
+    console.log("category ", category);
   
     return this.http.post(URI, category).pipe(
       catchError((err: HttpErrorResponse) => {
@@ -79,34 +79,29 @@ export class CategoryPlacesService {
     );
   }
 
-  getCategoryById(id: string): Observable<any> {
-    let companyId = this.local.companyId
+  // getCategoryById(id: string): Observable<any> {
+  //   let companyId = this.local.companyId
 
-    const URI = this.urlApi + `categoriesPlaces/findById/${id}`;
-    let data = {
-      "companyId": companyId
-    };
+  //   const URI = this.urlApi + `categoriesPlaces/findById/${id}`;
+    
 
-    return this.http.post<Category>(URI, data).
-      pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            this._authService.logout();
-          }
-          // Lanza el error nuevamente para ser manejado
-          return this.handleError(err);
-        })
-      )
-  }
+  //   return this.http.post<Category>(URI, data).
+  //     pipe(
+  //       catchError((err: HttpErrorResponse) => {
+  //         if (err.status === 401) {
+  //           this._authService.logout();
+  //         }
+  //         // Lanza el error nuevamente para ser manejado
+  //         return this.handleError(err);
+  //       })
+  //     )
+  // }
 
   getCategories(): Observable<any> {
     const URI = this.urlApi + `categoriesPlaces/listar`;
-    let companyId = this.local.companyId
 
-    let data = {
-      "companyId": companyId
-    };
-    return this.http.post<Category>(URI, data).
+ 
+    return this.http.get<Category>(URI).
       pipe(
         catchError((err: HttpErrorResponse) => {
           if (err.status === 401) {
